@@ -26,7 +26,7 @@ if expenses_collection.count_documents({}) == 0:
             "amount": 120.00,
             "description": "Electricity bill for January"
         },
-        # Add more sample expenses as needed
+        
     ]
 
     # Insert sample expense data into the expenses collection

@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from datetime import datetime
-
+#Testcommitfromvscode
 # Connect to the MongoDB server running on localhost at default port 27017
 client = MongoClient('localhost', 27017)
 

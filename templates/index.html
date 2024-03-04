@@ -49,16 +49,16 @@
         {% endfor %}
     </table>
 
-    <!-- Create a container for the graph -->
+    <!-- Container for the graph -->
     <div id="graph-container"></div>
 
     <!-- JavaScript to render the graph -->
     <script>
         // Parse the graph JSON data
-        var graphData = {{ graph_json | safe | tojson }};
+        var graphData = JSON.parse('{{ graph_json | safe | tojson | replace("\'", "\\\'") }}');
 
-        // Render the graph
-        Plotly.newPlot('graph-container', graphData.data, graphData.layout);
+        // Render the graph directly
+        Plotly.newPlot('graph', graphData.data, graphData.layout);
     </script>
 </body>
 </html>

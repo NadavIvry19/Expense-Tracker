@@ -38,6 +38,7 @@
             <th>Category</th>
             <th>Amount</th>
             <th>Description</th>
+            <th>Action</th> <!-- Add this column for removing expenses -->
         </tr>
         {% for expense in expenses %}
             <tr>
@@ -45,6 +46,12 @@
                 <td>{{ expense.category }}</td>
                 <td>{{ expense.amount }}</td>
                 <td>{{ expense.description }}</td>
+                <td>
+                    <form action="/remove_expense" method="POST">
+                        <input type="hidden" name="expense_id" value="{{ expense._id }}">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -55,10 +62,10 @@
     <!-- JavaScript to render the graph -->
     <script>
         // Parse the graph JSON data
-        var graphData = JSON.parse('{{ graph_json | safe | tojson | replace("\'", "\\\'") }}');
+        var graphData = JSON.parse('{{ graph_json | safe | tojson }}');
 
-        // Render the graph directly
-        Plotly.newPlot('graph', graphData.data, graphData.layout);
+        // Render the graph
+        Plotly.newPlot('graph-container', graphData.data, graphData.layout);
     </script>
 </body>
 </html>

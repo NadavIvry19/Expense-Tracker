@@ -4,7 +4,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 from pymongo import MongoClient
 from datetime import datetime
-import plotly.graph_objs as go
 import json
 from bson import ObjectId
 
@@ -27,16 +26,8 @@ def main_menu():
     dates_str = [expense['date'].strftime('%Y-%m-%d') for expense in expenses]
     amounts = [expense['amount'] for expense in expenses]
 
-    # Create Plotly graph
-    graph = go.Figure()
-    graph.add_trace(go.Scatter(x=dates_str, y=amounts, mode='lines+markers'))
-    graph_layout = dict(title='Expenses Over Time', xaxis_title='Date', yaxis_title='Amount')
-
-    # Convert graph data to JSON format
-    graph_json = graph.to_json()
-
-    # Render index.html template and pass expenses, error message, and graph JSON to it
-    return render_template('index.html', expenses=expenses, graph_json=graph_json, graph_layout=json.dumps(graph_layout))
+    # Render index.html template and pass expenses, error message, dates, and amounts to it
+    return render_template('index.html', expenses=expenses, dates=dates_str, amounts=amounts)
 
 # Route to add a new expense
 @app.route('/add_expense', methods=['POST'])

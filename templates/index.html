@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Include Plotly.js -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Expense Tracker</h1>
@@ -57,16 +57,39 @@
     </table>
 
     <!-- Container for the graph -->
-    <div id="graph-container"></div>
+    <canvas id="myChart" width="400" height="400"></canvas>
 
     <!-- JavaScript to render the graph -->
     <script>
-        // Parse the graph JSON data
-        var graphData = JSON.parse('{{ graph_json | safe | tojson }}');
-        var graphLayout = JSON.parse('{{ graph_layout | safe | tojson }}');
+        // Get dates and amounts from Flask template
+        var dates = JSON.parse('{{ dates | tojson }}');
+        var amounts = JSON.parse('{{ amounts | tojson }}');
 
-        // Render the graph
-        Plotly.newPlot('graph-container', graphData.data, graphLayout);
+        // Prepare data for Chart.js
+        var chartData = {
+            labels: dates,
+            datasets: [{
+                label: 'Expenses Over Time',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: amounts,
+            }]
+        };
+
+        // Render the graph using Chart.js
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>

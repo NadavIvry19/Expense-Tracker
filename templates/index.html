@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <h1>Expense Tracker</h1>
@@ -46,5 +48,17 @@
             </tr>
         {% endfor %}
     </table>
+
+    <!-- Create a container for the graph -->
+    <div id="graph-container"></div>
+
+    <!-- JavaScript to render the graph -->
+    <script>
+        // Parse the graph JSON data
+        var graphData = {{ graph_json | safe | tojson }};
+
+        // Render the graph
+        Plotly.newPlot('graph-container', graphData.data, graphData.layout);
+    </script>
 </body>
 </html>

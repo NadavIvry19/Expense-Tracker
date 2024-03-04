@@ -4,7 +4,7 @@ services:
   web:
     build: .
     ports:
-      - "8080:8080"
+      - "5000:5000"
     environment:
       - MONGODB_URI=mongodb://mongo:27017/expense_tracker
     depends_on:

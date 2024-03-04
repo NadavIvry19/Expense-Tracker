@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from datetime import datetime
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='templates/static', static_url_path='/static')
 
 # Connect to MongoDB
 client = MongoClient('mongodb://localhost:27017/')
@@ -38,11 +38,20 @@ def add_expense():
         error_message = 'Form not filled'
         return redirect(url_for('main_menu', error_message=error_message))
 
+    # Check if the amount is greater than 0
+    if expense_data['amount'] <= 0:
+        error_message = 'Expense amount must be greater than 0'
+        return redirect(url_for('main_menu', error_message=error_message))
+
+    # Append ILS currency to the amount
+    expense_data['amount'] = str(expense_data['amount']) + " ILS"
+
     # Insert the expense data into the MongoDB collection
     collection.insert_one(expense_data)
 
     # Redirect to the main page after adding the expense
     return redirect(url_for('main_menu'))
+
 
 # Run the app
 if __name__ == '__main__':

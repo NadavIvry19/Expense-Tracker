@@ -1,4 +1,2 @@
-Flask
-PyMongo
-pytest 
-Flask-Testing
+Flask==2.0.2
+pymongo==3.12.0

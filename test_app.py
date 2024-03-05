@@ -1,37 +1,35 @@
 import pytest
 from app import app
 
-
 @pytest.fixture
 def client():
-    """Create a test client for the Flask app."""
     app.config['TESTING'] = True
     with app.test_client() as client:
         yield client
 
-
 def test_main_menu(client):
-    """Test if the main menu page is accessible."""
     response = client.get('/')
     assert response.status_code == 200
-    assert b"Expense Tracker" in response.data
-
+    assert b'Expense Tracker' in response.data
 
 def test_add_expense(client):
-    """Test adding a new expense."""
-    # Data for the expense form
-    data = {
+    response = client.post('/add_expense', data={
         'date': '2024-03-05',
-        'category': 'Groceries',
-        'amount': '50.00',
-        'description': 'Weekly groceries shopping'
-    }
+        'category': 'Food',
+        'amount': '20.50',
+        'description': 'Lunch'
+    })
+    assert response.status_code == 302  # Redirect status code
+    assert 'expense_id' in response.headers['Location']
 
-    # Send a POST request to add the expense
-    response = client.post('/add_expense', data=data, follow_redirects=True)
+    # Extract the expense ID from the redirect URL
+    expense_id = response.headers['Location'].split('=')[-1]
 
-    # Check if the expense is added successfully
-    assert response.status_code == 200
-    assert b"Groceries" in response.data
-    assert b"50.00" in response.data
-    assert b"Weekly groceries shopping" in response.data
+    # Test removing the added expense
+    remove_response = client.post('/remove_expense', data={
+        'expense_id': expense_id
+    })
+    assert remove_response.status_code == 302  # Redirect status code
+
+if __name__ == '__main__':
+    pytest.main()

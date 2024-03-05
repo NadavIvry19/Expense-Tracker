@@ -1,12 +1,9 @@
-# app.py
-
 # Import necessary libraries
 from flask import Flask, request, render_template, redirect, url_for
 from pymongo import MongoClient
 from datetime import datetime
 import json
 from bson import ObjectId
-
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='templates/static', static_url_path='/static')
@@ -22,12 +19,17 @@ def main_menu():
     # Fetch expenses from the MongoDB collection
     expenses = list(collection.find())
 
-    # Extract dates and amounts from expenses for graph
-    dates_str = [expense['date'].strftime('%Y-%m-%d') for expense in expenses]
-    amounts = [expense['amount'] for expense in expenses]
+    # Aggregate expenses by date and calculate cumulative total amount
+    cumulative_total = 0
+    cumulative_totals = []
+    dates_str = []
+    for expense in expenses:
+        cumulative_total += expense['amount']
+        cumulative_totals.append(cumulative_total)
+        dates_str.append(expense['date'].strftime('%Y-%m-%d'))
 
     # Render index.html template and pass expenses, error message, dates, and amounts to it
-    return render_template('index.html', expenses=expenses, dates=dates_str, amounts=amounts)
+    return render_template('index.html', expenses=expenses, dates=dates_str, amounts=cumulative_totals)
 
 # Route to add a new expense
 @app.route('/add_expense', methods=['POST'])
@@ -41,10 +43,10 @@ def add_expense():
     }
 
     # Insert the expense data into the MongoDB collection
-    collection.insert_one(expense_data)
+    result = collection.insert_one(expense_data)
 
-    # Redirect to the main page after adding the expense
-    return redirect(url_for('main_menu'))
+    # Include the ID of the added expense in the redirect URL
+    return redirect(url_for('main_menu', expense_id=result.inserted_id))
 
 # Route to remove an expense
 @app.route('/remove_expense', methods=['POST'])

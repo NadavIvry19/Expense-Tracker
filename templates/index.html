@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* CSS to make the graph smaller */
+        #graph-container {
+            width: 60%; /* Adjust width as needed */
+            margin: auto;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Expense Tracker</h1>
@@ -57,7 +65,9 @@
     </table>
 
     <!-- Container for the graph -->
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <div id="graph-container">
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
 
     <!-- JavaScript to render the graph -->
     <script>

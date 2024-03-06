@@ -35,14 +35,22 @@ def main_menu():
 @app.route('/add_expense', methods=['POST'])
 def add_expense():
     # Get expense data from the form submitted via POST request
-    expense_data = {
-        "date": datetime.strptime(request.form['date'], '%Y-%m-%d'),  # Convert to datetime object
-        "category": request.form['category'],
-        "amount": float(request.form['amount']),  # Convert to float
-        "description": request.form['description']
-    }
+    date = datetime.strptime(request.form['date'], '%Y-%m-%d')
+    category = request.form['category']
+    amount = float(request.form['amount'])
+    description = request.form['description']
+
+    # Ensure that amount is greater than 0
+    if amount <= 0:
+        return "Expense amount must be greater than 0."
 
     # Insert the expense data into the MongoDB collection
+    expense_data = {
+        "date": date,
+        "category": category,
+        "amount": amount,
+        "description": description
+    }
     result = collection.insert_one(expense_data)
 
     # Include the ID of the added expense in the redirect URL

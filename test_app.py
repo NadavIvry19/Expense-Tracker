@@ -18,10 +18,10 @@ def test_add_expense(client):
         date='2024-03-05',
         category='Food',
         amount='10.50',
-        description='Lunch'
+        description='Dinner'
     ), follow_redirects=True)
     assert response.status_code == 200
-    assert b'Lunch' in response.data
+    assert b'Dinner' in response.data
 
 def test_remove_expense(client):
     # Add an expense first
@@ -29,7 +29,7 @@ def test_remove_expense(client):
         date='2024-03-05',
         category='Food',
         amount='10.50',
-        description='Lunch'
+        description='Dinner'
     ), follow_redirects=True)
     assert response.status_code == 200
 

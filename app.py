@@ -9,7 +9,7 @@ from bson import ObjectId
 app = Flask(__name__, static_folder='templates/static', static_url_path='/static')
 
 # Connect to MongoDB
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://mongo:27017/')
 db = client['expense_tracker']
 collection = db['expenses']
 
@@ -70,4 +70,4 @@ def remove_expense():
 
 # Run the app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5001)

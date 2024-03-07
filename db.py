@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from datetime import datetime
 #Testcommitfromvscode
 # Connect to the MongoDB server running on localhost at default port 27017
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongo', 27017)
 
 # Access a specific database, create it if not exists
 db = client['expense_tracker']

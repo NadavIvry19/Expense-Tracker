@@ -4,9 +4,9 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "5001:5001"
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/expeses_tracker
+      - MONGODB_URI=mongodb://mongo:27017/expense_tracker
     depends_on:
       - mongo
 
@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: Dockerfile.test
     environment:
-      - TEST_MONGODB_URI=mongodb://mongo:27017/expeses_tracker
+      - TEST_MONGODB_URI=mongodb://mongo:27017/expense_tracker
     depends_on:
       - mongo
 

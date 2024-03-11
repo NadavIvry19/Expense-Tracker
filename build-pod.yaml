@@ -9,6 +9,10 @@ spec:
       imagePullPolicy: Always
       securityContext:
         privileged: true
+      resources:
+        limits:
+          cpu: "1"
+          memory: "512Mi"  # Adjust memory limit as needed
 
     - name: python-test
       image: python:3.8-slim
@@ -17,6 +21,10 @@ spec:
       imagePullPolicy: Always
       securityContext:
         privileged: false
+      resources:
+        limits:
+          cpu: "0.5"
+          memory: "256Mi"  # Adjust memory limit as needed
 
     - name: docker-compose
       image: docker/compose:latest
@@ -28,6 +36,10 @@ spec:
       volumeMounts:
         - name: docker-socket
           mountPath: /var/run/docker.sock
+      resources:
+        limits:
+          cpu: "1"
+          memory: "512Mi"  # Adjust memory limit as needed
 
   volumes:
     - name: docker-socket

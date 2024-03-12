@@ -48,7 +48,7 @@ pipeline {
                     
                     // Run the test container on the custom network, ensure the MONGO_URI environment variable
                     // is set within the container to use the MongoDB container's hostname
-                    sh 'docker run --name expense-tracker-test-container --network expense-tracker-net -e MONGO_URI=mongodb://mongodb-test:27017/expenses_tracker my-final-project-app-tests:${BUILD_NUMBER}'
+                    sh 'docker run --name expense-tracker-test-container --network expense-tracker-net -e MONGO_URI=mongodb://mongo:27017/expenses_tracker my-final-project-app-tests:${BUILD_NUMBER}'
                 }
             }
         }

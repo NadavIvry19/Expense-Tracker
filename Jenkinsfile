@@ -47,7 +47,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com/', 'nadav-gitlab') {
+                    docker.withRegistry('https://registry.hub.docker.com/', 'nadav-dockerhub') {
                         dockerImage.push("latest")
                     }
                 }

@@ -2,14 +2,15 @@
 from flask import Flask, request, render_template, redirect, url_for
 from pymongo import MongoClient
 from datetime import datetime
-import json
+import os
 from bson import ObjectId
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='templates/static', static_url_path='/static')
 
 # Connect to MongoDB
-client = MongoClient('mongodb://mongo:27017/')
+mongodb_uri = os.getenv('MONGODB_URI', 'mongodb://mongo:27017/')
+client = MongoClient(mongodb_uri)
 db = client['expense_tracker']
 collection = db['expenses']
 

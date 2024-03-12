@@ -14,6 +14,7 @@ pipeline {
         PROJECT_ID = '55376310'
         GITLAB_URL = 'https://gitlab.com'
     }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -25,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile at the root of the repository
-                    dockerImage = docker.build("latest", "--no-cache .")
+                    dockerImage = docker.build("my-final-project-web:latest", "--no-cache .")
                 }
             }
         }
@@ -37,17 +38,17 @@ pipeline {
                     sh 'docker network create expense-tracker-net'
                     
                     // Build the Docker test image
-                    def testDockerImage = docker.build("expense-tracker-test:${BUILD_NUMBER}", "-f Dockerfile.test .")
+                    def testDockerImage = docker.build("my-final-project-app-tests:${BUILD_NUMBER}", "-f Dockerfile.test .")
                     
                     // Start MongoDB container on the custom network
-                    sh 'docker run -d --name mongodb-test --network expense-tracker-net mongo:4.4'
+                    sh 'docker run -d --name mongodb-test --network expense-tracker-net mongo:latest'
                     
                     // Wait for MongoDB to fully start
                     sh 'sleep 10'
                     
                     // Run the test container on the custom network, ensure the MONGO_URI environment variable
                     // is set within the container to use the MongoDB container's hostname
-                    sh 'docker run --name expense-tracker-test-container --network expense-tracker-net -e MONGO_URI=mongodb://mongodb-test:27017/expenses_tracker_db expense-tracker-test:${BUILD_NUMBER}'
+                    sh 'docker run --name expense-tracker-test-container --network expense-tracker-net -e MONGO_URI=mongodb://mongodb-test:27017/expenses_tracker my-final-project-app-tests:${BUILD_NUMBER}'
                 }
             }
         }

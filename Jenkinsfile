@@ -47,9 +47,9 @@ pipeline {
             }
             steps {
                 script {
-                    def dockerHub = docker.registry('https://registry.hub.docker.com/flask_nadav', 'nadav-docker-hub')
-                    def customImage = docker.image('my-custom-image:latest')
-                    customImage.push('latest')
+                    docker.withRegistry('https://registry.hub.docker.com/', 'nadav-gitlab') {
+                        dockerImage.push("latest")
+                    }
                 }
             }
         }

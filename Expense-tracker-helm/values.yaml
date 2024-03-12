@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: nadavivry69/expense-tracker
+  repository: nadavivry69/flask_nadav
   pullPolicy: Always  # Changed from IfNotPresent to Always
   tag: "latest"
 
@@ -81,9 +81,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-env:
-  - name: "MONGO_URI"
-    value: "mongodb://host.docker.internal:27017/expenses_tracker"
 
 
 volumes: []

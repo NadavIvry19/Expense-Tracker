@@ -10,7 +10,6 @@ pipeline {
 
     environment {
         GITLAB_CREDS = 'nadav-gitlab'
-        DOCKER_IMAGE = 'nadavivry69/expense-tracker'
         // No longer using the 'localhost' since we'll be using a Docker network
         PROJECT_ID = '55376310'
         GITLAB_URL = 'https://gitlab.com'
@@ -25,8 +24,8 @@ pipeline {
         stage('Build Application Docker image') {
             steps {
                 script {
-                    // Build the main Docker image of the application
-                    dockerImage = docker.build("${DOCKER_IMAGE}:latest", "--no-cache .")
+                    // Build the Docker image using the Dockerfile at the root of the repository
+                    dockerImage = docker.build("latest", "--no-cache .")
                 }
             }
         }

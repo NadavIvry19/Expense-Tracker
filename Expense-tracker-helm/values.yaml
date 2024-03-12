@@ -1,5 +1,5 @@
 # Default values for expense-tracker-app.
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: nadavivry69/expense-tracker

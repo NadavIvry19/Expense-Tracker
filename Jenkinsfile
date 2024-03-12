@@ -13,6 +13,7 @@ pipeline {
         MONGODB_URI = 'mongodb://mongo:27017/expense_tracker'
         PROJECT_ID = '55376310'
         GITLAB_URL = 'https://gitlab.com'
+        DOCKER_IMAGE = 'nadavivry69/flask_nadav'
     }
 
     stages {
@@ -26,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image using Dockerfile in the root directory
-                    docker.build("my-custom-image", "--no-cache .")
+                    dockerImage = docker.build("${DOCKER_IMAGE}:latest", "--no-cache .")
                 }
             }
         }

@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "Expense-tracker-helm.fullname" . }}
+  name: {{ include "expense-tracker-helm.fullname" . }}
   labels:
-    {{- include "Expense-tracker-helm.labels" . | nindent 4 }}
+    {{- include "expense-tracker-helm.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "Expense-tracker-helm.fullname" . }}
+    name: {{ include "expense-tracker-helm.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "Expense-tracker-helm.name" -}}
+{{- define "expense-tracker-helm.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "Expense-tracker-helm.fullname" -}}
+{{- define "expense-tracker-helm.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "Expense-tracker-helm.chart" -}}
+{{- define "expense-tracker-helm.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "Expense-tracker-helm.labels" -}}
-helm.sh/chart: {{ include "Expense-tracker-helm.chart" . }}
-{{ include "Expense-tracker-helm.selectorLabels" . }}
+{{- define "expense-tracker-helm.labels" -}}
+helm.sh/chart: {{ include "expense-tracker-helm.chart" . }}
+{{ include "expense-tracker-helm.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "Expense-tracker-helm.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "Expense-tracker-helm.name" . }}
+{{- define "expense-tracker-helm.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "expense-tracker-helm.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "Expense-tracker-helm.serviceAccountName" -}}
+{{- define "expense-tracker-helm.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "Expense-tracker-helm.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "expense-tracker-helm.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

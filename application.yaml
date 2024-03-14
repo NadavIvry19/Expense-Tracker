@@ -9,8 +9,7 @@ spec:
     repoURL: https://gitlab.com/sela-tracks/1101/nadav/my-final-project
     targetRevision: HEAD
     path: ./Expense-tracker-helm  # Path within your repo to the helm chart.
-    repoURLSecret:
-      name: argocd-gitlab-pat  # Use the secret here
+    sourceType: Helm
     helm:
       parameters:
         - name: image.repository  # Assuming your Helm values use this key
@@ -19,6 +18,14 @@ spec:
           value: latest
         - name: image.pullPolicy  # Ensure your Helm chart supports this parameter
           value: Always
+    # Use the following section to specify a secret containing your GitLab PAT
+    chartSource:
+      repoURL: https://gitlab.com/sela-tracks/1101/nadav/my-final-project
+      targetRevision: HEAD
+      path: ./Expense-tracker-helm  # Path within your repo to the Helm chart
+      repoURLSecret:
+        name: argocd-gitlab-pat  # Name of the secret containing the PAT
+        key: token  # Key within the secret that contains the PAT
   destination:
     server: https://kubernetes.default.svc
     namespace: default

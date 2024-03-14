@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: finalproject-release
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/sela-tracks/1101/nadav/my-final-project
+    targetRevision: HEAD
+    path: ./Expense-tracker-helm  # Path within your repo to the helm chart.
+    helm:
+      parameters:
+        - name: image.repository  # Assuming your Helm values use this key
+          value: nadavivry69/flask_nadav
+        - name: image.tag  # Assuming your Helm values use this key
+          value: latest
+        - name: image.pullPolicy  # Ensure your Helm chart supports this parameter
+          value: Always
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

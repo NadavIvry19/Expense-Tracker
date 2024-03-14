@@ -3,18 +3,18 @@ kind: StatefulSet
 metadata:
   name: mongodb-statefulset
 spec:
-  serviceName: "mongodb"
+  serviceName: "mongo"
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb
+      app: mongo
   template:
     metadata:
       labels:
-        app: mongodb
+        app: mongo
     spec:
       containers:
-      - name: mongodb
+      - name: mongo
         image: mongo:4.4
         ports:
         - containerPort: 27017

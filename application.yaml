@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://gitlab.com/sela-tracks/1101/nadav/my-final-project
     targetRevision: HEAD
-    path: ./Expense-tracker-helm  # Path within your repo to the helm chart.
+    path: ./expense-tracker-helm  # Path within your repo to the helm chart.
     helm:
       parameters:
         - name: image.repository  # Assuming your Helm values use this key

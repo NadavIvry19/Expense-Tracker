@@ -9,6 +9,10 @@ spec:
     repoURL: https://gitlab.com/sela-tracks/1101/nadav/my-final-project
     targetRevision: HEAD
     path: ./Expense-tracker-helm  # Path within your repo to the helm chart.
+    git:
+      tokenSecret:
+        name: argocd-gitlab-pat  # Use the secret here
+        key: token  # Assuming the key in the secret is named "token"
     helm:
       parameters:
         - name: image.repository  # Assuming your Helm values use this key

@@ -20,7 +20,7 @@ spec:
         - name: persistence.size
           value: 4Gi
         - name: service.nameOverride  # Correct parameter for MongoDB service name
-          value: "mongo:27017"      # Set the desired service name here
+          value: "mongo"      # Set the desired service name here
   destination:
     server: https://kubernetes.default.svc
     namespace: default

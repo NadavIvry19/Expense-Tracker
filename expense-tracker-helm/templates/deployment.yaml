@@ -48,7 +48,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
           - name: MONGODB_URI
-            value: mongodb://mongodb.default.svc.cluster.local:27017/expense_tracker
+            value: mongodb://mongodb://mongo:27017/expense_tracker'
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}

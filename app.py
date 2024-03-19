@@ -9,7 +9,7 @@ from bson import ObjectId
 app = Flask(__name__, static_folder='templates/static', static_url_path='/static')
 
 # Connect to MongoDB
-mongodb_uri = os.getenv('MONGODB_URI', 'mongodb://root:nadav@mongo-mongodb:27017/')
+mongodb_uri = os.getenv('MONGODB_URI', 'mongodb://mongo:27017/task_management')
 client = MongoClient(mongodb_uri)
 db = client['expense_tracker']
 collection = db['expenses']

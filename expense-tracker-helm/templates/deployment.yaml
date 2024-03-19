@@ -48,7 +48,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
           - name: MONGODB_URI
-            value: 'mongodb://root:nadav@mongo-mongodb:27017/'
+            value: 'mongodb://mongo:27017/task_management'
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}

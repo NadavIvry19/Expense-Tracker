@@ -11,8 +11,6 @@ spec:
     targetRevision: "14.12.3"
     helm:
       parameters:
-        - name: auth.enabled
-          value: 'true'
         - name: auth.rootPassword
           value: your-root-password
         - name: architecture
@@ -21,8 +19,6 @@ spec:
           value: "true"
         - name: persistence.size
           value: 8Gi
-        - name: service.nameOverride
-          value: mongo
   destination:
     server: https://kubernetes.default.svc
     namespace: default

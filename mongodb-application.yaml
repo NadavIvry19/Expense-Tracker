@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    chart: mongodb-shared
-    targetRevision: "8.0.0"
+    chart: mongodb
+    targetRevision: "14.12.3"
     helm:
       parameters:
         - name: auth.enabled

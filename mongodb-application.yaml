@@ -14,13 +14,15 @@ spec:
         - name: auth.enabled
           value: 'false'
         - name: auth.rootPassword
-          value: "nadav"
+          value: your-root-password
         - name: architecture
           value: "standalone"
         - name: persistence.enabled
           value: "true"
         - name: persistence.size
           value: 8Gi
+        - name: service.nameOverride
+          value: mongo
   destination:
     server: https://kubernetes.default.svc
     namespace: default

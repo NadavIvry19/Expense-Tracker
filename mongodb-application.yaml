@@ -8,17 +8,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: mongodb
-    targetRevision: "15.0.1"
-    helm:
-      parameters:
-        - name: auth.rootPassword
-          value: your-root-password
-        - name: architecture
-          value: "standalone"
-        - name: persistence.enabled
-          value: "true"
-        - name: persistence.size
-          value: 8Gi
+    targetRevision: "14.12.3"
   destination:
     server: https://kubernetes.default.svc
     namespace: default

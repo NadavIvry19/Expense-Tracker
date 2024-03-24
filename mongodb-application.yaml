@@ -19,6 +19,8 @@ spec:
           value: "true"
         - name: persistence.size
           value: 8Gi
+        - name: service.nameOveride
+          value: 'mongo'
   destination:
     server: https://kubernetes.default.svc
     namespace: default

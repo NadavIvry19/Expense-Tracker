@@ -12,7 +12,7 @@ spec:
     helm:
       parameters:
         - name: auth.rootPassword
-          value: "nadav"
+          value: "root"
         - name: architecture
           value: "standalone"
         - name: persistence.enabled

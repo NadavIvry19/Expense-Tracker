@@ -48,7 +48,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
           - name: MONGODB_URI
-            value: 'mongodb://root:nadav@mongodb:27017/admin'
+            value: 'mongodb://root:oFVRdIuHax@my-mongodb:27017/admin'
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}

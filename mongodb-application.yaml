@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: mongodb
-    targetRevision: "15.0.1"
+    targetRevision: "14.12.3"
     helm:
       parameters:
         - name: auth.rootPassword

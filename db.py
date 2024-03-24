@@ -3,7 +3,7 @@ from datetime import datetime
 import os
 #Testcommitfromvscode
 # Connect to the MongoDB server running on localhost at default port 27017
-mongodb_uri = os.getenv('MONGODB_URI', 'mongodb://mongo:27017/')
+mongodb_uri = os.getenv('MONGODB_URI', 'mongodb://root:shalev@mongo-mongodb:27017/')
 client = MongoClient(mongodb_uri)
 
 # Access a specific database, create it if not exists

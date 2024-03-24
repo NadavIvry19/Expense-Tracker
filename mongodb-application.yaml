@@ -11,8 +11,8 @@ spec:
     targetRevision: "14.12.3"
     helm:
       parameters:
-        - name: auth.rootPassword
-          value: "nadav"
+        - name: auth.enabled
+          value: "false"
         - name: architecture
           value: "standalone"
         - name: persistence.enabled

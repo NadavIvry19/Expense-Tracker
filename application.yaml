@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: finalproject-release
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/enable: "true"
+    argocd-image-updater.argoproj.io/update-strategy: latest
+
 spec:
   project: default
   source:

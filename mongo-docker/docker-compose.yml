@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: ./mongodb.Dockerfile:latest  # Build the image from the Dockerfile
+    restart: unless-stopped  # Restart container on failures
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}  # Optional: Use environment variable from outside
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}  # Optional: Use environment variable from outside
+    volumes:
+      - mongo-data:/data/db  # Create a volume for persistence
+    ports:
+      - "27017:27017"  # Map container port to host port
+
+volumes:
+  mongo-data:  # Define the volume

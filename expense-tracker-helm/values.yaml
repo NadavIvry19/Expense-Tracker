@@ -88,6 +88,11 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+env:
+  - name: "MONGO_URI"
+    value: "mongodb://host.docker.internal:27017/expenses_tracker"
+
+
 # Additional volumes on the output Deployment definition.
 volumes: []
 # - name: foo

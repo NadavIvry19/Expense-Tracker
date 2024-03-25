@@ -23,6 +23,8 @@ spec:
           value: mongodb
         - name: enableIPv6
           value: 'true'
+        - name: service.nameOveride
+          value: 'mongodb'
   destination:
     server: https://kubernetes.default.svc
     namespace: default

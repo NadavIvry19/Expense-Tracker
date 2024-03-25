@@ -7,4 +7,4 @@ ENV MONGO_INITDB_ROOT_PASSWORD='your_strong_password'
 # Define the volume path for data persistence
 VOLUME /data/db
 
-CMD ["mongod", "--auth"]  # Start MongoDB with authentication
+CMD ["mongod", "--auth"]  

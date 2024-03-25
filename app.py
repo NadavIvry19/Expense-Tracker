@@ -13,7 +13,7 @@ mongodb_uri = os.getenv('MONGODB_URI', 'mongodb://mongo:27017/')
 client = MongoClient(mongodb_uri)
 db = client['expense_tracker']
 collection = db['expenses']
-
+print(mongodb_uri)
 # Route to display main menu with expenses and graph
 @app.route('/')
 def main_menu():
